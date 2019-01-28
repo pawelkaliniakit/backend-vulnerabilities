@@ -1,0 +1,2 @@
+<?xml version="1.0"?>
+<attendee><firstName>John</firstName><lastName>Smith</lastName></attendee>

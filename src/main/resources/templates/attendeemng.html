@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+
+<html xmlns:th="http://www.thymeleaf.org">
+
+  <head>
+    <title>Spring Thyme Attendee Manager</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+    <link rel="stylesheet" type="text/css" media="all" href="../../css/attendee.css" th:href="@{/css/attendee.css}"/>
+  </head>
+
+  <body>
+    
+    <div class="attendeelist" th:unless="${#lists.isEmpty(allAttendees)}">
+    
+      <h2 th:text="#{title.list}">List of Attendees</h2>
+      
+      <table>
+        <thead>
+          <tr>
+            <th th:text="#{attendee.id}">Id</th>
+            <th th:text="#{attendee.firstName}">First Name</th>
+            <th th:text="#{attendee.lastName}">Last Name</th>
+            <th th:text="#{attendee.email}">Email</th>
+            <th th:text="#{attendee.description}">Description</th>
+            <th th:text="#{attendee.added}">Added</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr th:each="at : ${allAttendees}">
+            <td th:text="${{at.id}}">1</td>
+            <td th:text="${{at.firstName}}">Jan</td>
+            <td th:text="${{at.lastName}}">Nowak</td>
+            <td th:text="${{at.email}}">test@gmail.com</td>
+            <td th:text="${{at.description}}">Description</td>
+            <td th:text="${{at.added}}">29/11/2018</td>
+          </tr>
+        </tbody>
+      </table>
+      
+    </div>
+
+
+    <div>
+    
+      <h2 th:text="#{title.new}">Add new Attendee</h2>
+
+      <form action="#" th:action="@{/attendeemng}" th:object="${attendee}" method="post">
+    
+        <fieldset>
+          
+          <legend th:text="#{attendee.data}">Attendee Data</legend>
+
+          <ul th:if="${#fields.hasErrors('*')}" class="errorlist">
+            <li th:each="err : ${#fields.errors('*')}" th:text="${err}">Input is incorrect</li>
+          </ul>
+
+          
+          <div>
+            <label for="added">
+              <span th:text="#{attendee.added}">Date added</span>
+              (<span th:text="#{date.format}">YYYY/MM/DD</span>)
+            </label>
+            <input type="text" th:field="*{added}" th:errorclass="fieldError" />
+          </div>
+          <div>
+            <label for="firstName" th:text="#{attendee.firstName}">First Name</label>
+            <input type="text" th:field="*{firstName}" />
+          </div>
+
+          <div>
+            <label for="lastName" th:text="#{attendee.lastName}">Last Name</label>
+            <input type="text" th:field="*{lastName}" />
+          </div>
+
+          <div>
+            <label for="email" th:text="#{attendee.email}">Email</label>
+            <input type="text" th:field="*{email}" />
+          </div>
+
+          <div>
+            <label for="email" th:text="#{attendee.description}">Description</label>
+            <input type="text" th:field="*{description}" />
+          </div>
+    
+          <div class="submit">
+            <button type="submit" name="save" th:text="#{attendee.create}">Add Attendee</button>
+          </div>
+        
+        </fieldset>
+          
+      </form>
+        
+    </div>
+
+  </body>
+</html>
