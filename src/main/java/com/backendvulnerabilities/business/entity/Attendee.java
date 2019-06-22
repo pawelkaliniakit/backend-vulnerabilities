@@ -1,6 +1,7 @@
 package com.backendvulnerabilities.business.entity;
 
 import lombok.Data;
+import org.springframework.format.annotation.DateTimeFormat;
 
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -22,6 +23,7 @@ public class Attendee {
     private String email;
     @Size(max = 3000)
     private String description;
+    @DateTimeFormat(pattern = "MM/dd/yyyy")
     private Date added;
 
 }
