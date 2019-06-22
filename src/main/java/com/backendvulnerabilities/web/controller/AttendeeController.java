@@ -30,6 +30,7 @@ import org.springframework.ui.ModelMap;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
+import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 import org.xml.sax.SAXException;
 
@@ -55,8 +56,9 @@ public class AttendeeController {
 
 
     @RequestMapping({"/", "/attendeemng"})
-    public String showAttendees(final Attendee attendee) {
+    public String showAttendees(final Attendee attendee, @RequestParam(required = false) String greeting, ModelMap modelMap) {
         attendee.setAdded(Calendar.getInstance().getTime());
+        modelMap.put("greeting", greeting);
         return "attendeemng";
     }
 

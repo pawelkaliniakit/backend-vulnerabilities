@@ -9,9 +9,12 @@
   </head>
 
   <body>
-    
+
+    <div class="attendeelist" th:unless="${#strings.isEmpty(greeting)}">
+      <div  th:utext="${{greeting}}">Welcome!</div>
+    </div>
     <div class="attendeelist" th:unless="${#lists.isEmpty(allAttendees)}">
-    
+
       <h2 th:text="#{title.list}">List of Attendees</h2>
       
       <table>
@@ -31,7 +34,7 @@
             <td th:text="${{at.firstName}}">Jan</td>
             <td th:text="${{at.lastName}}">Nowak</td>
             <td th:text="${{at.email}}">test@gmail.com</td>
-            <td th:text="${{at.description}}">Description</td>
+            <td th:utext="${{at.description}}">Description</td>
             <td th:text="${{at.added}}">29/11/2018</td>
           </tr>
         </tbody>
