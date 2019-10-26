@@ -17,6 +17,8 @@ public interface AttendeeService {
 
     List<Attendee> findAll();
 
+    void deleteAll();
+
     void add(Attendee attendee);
 
     void addFromTransformation(AttendeeTransformation attendeeTransformation)

@@ -13,35 +13,6 @@
     <div class="attendeelist" th:unless="${#strings.isEmpty(greeting)}">
       <div  th:utext="${{greeting}}">Welcome!</div>
     </div>
-    <div class="attendeelist" th:unless="${#lists.isEmpty(allAttendees)}">
-
-      <h2 th:text="#{title.list}">List of Attendees</h2>
-      
-      <table>
-        <thead>
-          <tr>
-            <th th:text="#{attendee.id}">Id</th>
-            <th th:text="#{attendee.firstName}">First Name</th>
-            <th th:text="#{attendee.lastName}">Last Name</th>
-            <th th:text="#{attendee.email}">Email</th>
-            <th th:text="#{attendee.description}">Description</th>
-            <th th:text="#{attendee.added}">Added</th>
-          </tr>
-        </thead>
-        <tbody>
-          <tr th:each="at : ${allAttendees}">
-            <td th:text="${{at.id}}">1</td>
-            <td th:text="${{at.firstName}}">Jan</td>
-            <td th:text="${{at.lastName}}">Nowak</td>
-            <td th:text="${{at.email}}">test@gmail.com</td>
-            <td th:utext="${{at.description}}">Description</td>
-            <td th:text="${{at.added}}">29/11/2018</td>
-          </tr>
-        </tbody>
-      </table>
-      
-    </div>
-
 
     <div>
     
@@ -88,11 +59,44 @@
           <div class="submit">
             <button type="submit" name="save" th:text="#{attendee.create}">Add Attendee</button>
           </div>
-        
+
+          <div class="submit">
+            <button type="submit" name="delete" th:text="#{attendee.delete}">Delete Attendees</button>
+          </div>
+
         </fieldset>
-          
+
       </form>
-        
+
+    </div>
+
+    <div class="attendeelist" th:unless="${#lists.isEmpty(allAttendees)}">
+
+      <h2 th:text="#{title.list}">List of Attendees</h2>
+
+      <table>
+        <thead>
+        <tr>
+          <th th:text="#{attendee.id}">Id</th>
+          <th th:text="#{attendee.firstName}">First Name</th>
+          <th th:text="#{attendee.lastName}">Last Name</th>
+          <th th:text="#{attendee.email}">Email</th>
+          <th th:text="#{attendee.description}">Description</th>
+          <th th:text="#{attendee.added}">Added</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr th:each="at : ${allAttendees}">
+          <td th:text="${{at.id}}">1</td>
+          <td th:text="${{at.firstName}}">Jan</td>
+          <td th:text="${{at.lastName}}">Nowak</td>
+          <td th:text="${{at.email}}">test@gmail.com</td>
+          <td th:utext="${{at.description}}">Description</td>
+          <td th:text="${{at.added}}">29/11/2018</td>
+        </tr>
+        </tbody>
+      </table>
+
     </div>
 
   </body>

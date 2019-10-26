@@ -50,6 +50,11 @@ public class AttendeeServiceImpl implements AttendeeService {
     }
 
     @Override
+    public void deleteAll() {
+        attendeeRepository.deleteAll();
+    }
+
+    @Override
     public void addFromTransformation(AttendeeTransformation attendeeTransformation)
             throws IOException, SAXException, ParserConfigurationException, TransformerException, JAXBException {
         InputStream xslFileStream = new ByteArrayInputStream(attendeeTransformation.getXslt().getBytes());

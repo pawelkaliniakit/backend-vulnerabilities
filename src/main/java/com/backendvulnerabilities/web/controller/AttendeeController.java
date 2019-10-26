@@ -24,6 +24,8 @@ import com.backendvulnerabilities.business.entity.Attendee;
 import com.backendvulnerabilities.business.service.AttendeeService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.MediaType;
+import org.springframework.messaging.handler.annotation.MessageMapping;
+import org.springframework.messaging.handler.annotation.SendTo;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.ui.ModelMap;
@@ -32,8 +34,11 @@ import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
+import org.springframework.web.util.HtmlUtils;
 import org.xml.sax.SAXException;
 
+import javax.management.Attribute;
+import javax.servlet.http.HttpServletRequest;
 import javax.xml.bind.JAXBException;
 import javax.xml.parsers.ParserConfigurationException;
 import javax.xml.transform.TransformerConfigurationException;
@@ -73,6 +78,12 @@ public class AttendeeController {
         return "redirect:/attendeemng";
     }
 
+    @RequestMapping(value = "/attendeemng", params = {"delete"})
+    public String deleteAllAttendees(){
+        attendeeService.deleteAll();
+        return "redirect:/attendeemng";
+    }
+
     @GetMapping("/upload-attendee")
     public String showUploadForm(Model model) throws IOException {
         return "upload";
@@ -97,6 +108,13 @@ public class AttendeeController {
         return "attendeemng-xslt";
     }
 
+    @MessageMapping("/attendeemng")
+    @SendTo("/topic/results")
+    public Attendee addAttendeeWebSocket(Attendee attendee, HttpServletRequest request) throws Exception {
+        attendeeService.add(attendee);
+        return attendee;
+    }
+
     @PostMapping(value = "/upload-attendee-xslt")
     public String uploadAttendeeXMLWithXSLT(final AttendeeTransformation attendeeTransformation)
             throws IOException, ClassNotFoundException, ParserConfigurationException, SAXException,
@@ -104,5 +122,7 @@ public class AttendeeController {
         attendeeService.addFromTransformation(attendeeTransformation);
         return "redirect:/attendeemng";
     }
+
+
 
 }

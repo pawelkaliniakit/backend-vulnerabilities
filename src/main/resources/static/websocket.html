@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Hello WebSocket</title>
+  <link href="/webjars/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+  <link href="/main.css" rel="stylesheet">
+  <script src="/webjars/jquery/jquery.min.js"></script>
+  <script src="/webjars/sockjs-client/sockjs.min.js"></script>
+  <script src="/webjars/stomp-websocket/stomp.min.js"></script>
+  <script src="/app.js"></script>
+</head>
+<body>
+<noscript><h2 style="color: #ff0000">Seems your browser doesn't support Javascript! Websocket relies on Javascript being
+  enabled. Please enable
+  Javascript and reload this page!</h2></noscript>
+<div id="main-content" class="container">
+  <div class="row">
+    <div class="col-md-6">
+      <form class="form-inline">
+        <div class="form-group">
+          <label for="connect">WebSocket connection:</label>
+          <button id="connect" class="btn btn-default" type="submit">Connect</button>
+          <button id="disconnect" class="btn btn-default" type="submit" disabled="disabled">Disconnect
+          </button>
+        </div>
+      </form>
+    </div>
+    <div class="col-md-6">
+      <form class="form-inline">
+        <div class="form-group">
+          <label for="firstName">First name</label>
+          <input type="text" id="firstName" class="form-control" placeholder="Your first name here..."><br/>
+          <label for="lastName">Last name</label>
+          <input type="text" id="lastName" class="form-control" placeholder="Your last name here..."><br/>
+          <label for="email">Email</label>
+          <input type="text" id="email" class="form-control" placeholder="Your email here..."><br/>
+          <label for="description">Description</label>
+          <input type="text" id="description" class="form-control" placeholder="Your description here..."><br/>
+          <label for="added">Date added</label>
+          <input type="text" id="added" class="form-control" placeholder="Date format YYYY-MM-DD">
+        </div><br/>
+        <button id="send" class="btn btn-default" type="submit">Send</button>
+      </form>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-md-12">
+      <table id="conversation" class="table table-striped">
+        <thead>
+        <tr>
+          <th>Greetings</th>
+        </tr>
+        </thead>
+        <tbody id="greetings">
+        </tbody>
+      </table>
+    </div>
+  </div>
+</div>
+</body>
+</html>
